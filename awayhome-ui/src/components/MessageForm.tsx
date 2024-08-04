@@ -3,23 +3,9 @@
 
 import React, { useState } from 'react';
 import { Textarea, Button } from '../app/MTailwind';
-// import api from '../utils/axiosConfig';
+import axios from 'axios';
 
-// Mock send message function
-const mockSendMessage = async ({ senderId, receiverId, message }) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (message) {
-        console.log('Mock message sent:', { senderId, receiverId, message });
-        resolve({ data: 'Message sent successfully' });
-      } else {
-        reject(new Error('Message cannot be empty'));
-      }
-    }, 1000);
-  });
-};
-
-const MessageForm: React.FC<{ receiverId: number; onClose: () => void }> = ({
+const MessageForm: React.FC<{ receiverId: string; onClose: () => void }> = ({
   receiverId,
   onClose,
 }) => {
@@ -31,19 +17,19 @@ const MessageForm: React.FC<{ receiverId: number; onClose: () => void }> = ({
       if (!senderId) {
         throw new Error('User not logged in');
       }
-      // Uncomment the lines below once your API is ready
-      // const response = await api.post('/messages/send', {
-      //   senderId,
-      //   receiverId,
-      //   message,
-      // });
-      const response = await mockSendMessage({ senderId, receiverId, message });
-      alert(response.data);
+
+      const response = await axios.post('/messages/send', {
+        senderId,
+        receiverId,
+        message,
+      });
+
+      alert(response.data.message);
       setMessage('');
       onClose();
     } catch (error) {
       console.error('Error sending message: ', error);
-      alert(error.message || 'Failed to send message');
+      alert(error.response?.data?.error || 'Failed to send message');
     }
   };
 

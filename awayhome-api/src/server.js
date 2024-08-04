@@ -5,12 +5,13 @@ import cors from 'cors';
 import express from 'express';
 import { authenticate } from './middlewares/authMiddleware.js';
 import authRoutes from './routes/authRoutes.js';
+const messageRoutes = require('./routes/messageRoutes');
 // import animalRoutes from './routes/animalRoutes.js';
 
 // Log environment variables (for debugging, remove in production)
-console.log('FIREBASE_API_KEY:', process.env.FIREBASE_API_KEY);
-console.log('FIREBASE_AUTH_DOMAIN:', process.env.FIREBASE_AUTH_DOMAIN);
-console.log('FIREBASE_PROJECT_ID:', process.env.FIREBASE_PROJECT_ID);
+// console.log('FIREBASE_API_KEY:', process.env.FIREBASE_API_KEY);
+// console.log('FIREBASE_AUTH_DOMAIN:', process.env.FIREBASE_AUTH_DOMAIN);
+// console.log('FIREBASE_PROJECT_ID:', process.env.FIREBASE_PROJECT_ID);
 
 // Initialize Express app
 const app = express();
@@ -30,6 +31,7 @@ app.use(express.json());
 
 // Define routes
 app.use('/api/auth', authRoutes); // No authentication middleware for auth routes
+app.use('/api/messages', authenticate, messageRoutes);
 // app.use('/api/animals', authenticate, animalRoutes); // Example for protected routes
 
 app.get('/test', (req, res) => {

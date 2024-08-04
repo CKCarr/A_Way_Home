@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '../app/MTailwind';
+import MessageForm from './MessageForm';
 
-const PetCard = ({ pet, onMoreDetails, onContactPoster }) => {
+const PetCard = ({ pet, onMoreDetails }) => {
+  const [showMessageForm, setShowMessageForm] = useState(false);
+
+  const handleContactPoster = () => {
+    setShowMessageForm(true);
+  };
+
+  const handleCloseMessageForm = () => {
+    setShowMessageForm(false);
+  };
+
   return (
     <div className="bg-white p-4 rounded-lg shadow-md border-8 border-primary-blue cursor-pointer hover:shadow-lg transition-shadow duration-300 m-4">
       <div className="border-t-8 border-l-8 border-r-8 border-bright-teal overflow-hidden h-64">
@@ -34,7 +45,7 @@ const PetCard = ({ pet, onMoreDetails, onContactPoster }) => {
 
         <Button
           fullWidth
-          onClick={() => onContactPoster(pet)}
+          onClick={handleContactPoster}
           variant="text"
           size="sm"
           className="bg-dark-blue text-white border-white border hover:border-2 hover:border-primary-blue hover:bg-bright-teal hover:text-primary-blue"
@@ -42,6 +53,14 @@ const PetCard = ({ pet, onMoreDetails, onContactPoster }) => {
           Contact Poster
         </Button>
       </div>
+      {showMessageForm && (
+        <div className="mt-4">
+          <MessageForm
+            receiverId={pet.ownerId}
+            onClose={handleCloseMessageForm}
+          />
+        </div>
+      )}
     </div>
   );
 };
