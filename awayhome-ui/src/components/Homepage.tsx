@@ -22,6 +22,9 @@ const Homepage: React.FC = () => {
             <Button
               className="mt-6 px-6 py-4 text-white rounded bg-primary-blue hover:border hover:border-bright-teal hover:bg-primary-blue hover:text-bright-teal focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-blue"
               type="submit"
+              placeholder={undefined}
+              onPointerEnterCapture={undefined}
+              onPointerLeaveCapture={undefined}
             >
               Create Pet Post
             </Button>

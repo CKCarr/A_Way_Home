@@ -1,11 +1,11 @@
-// src/components/petList.tsx
+// src/components/PetList.tsx
 
 'use client';
 
 import React, { useEffect, useState } from 'react';
 import PetCard from './PetCard';
 import { Pet } from '../types';
-import { fetchPets } from '../api/pets';
+import { fetchPets } from '../app/api/pets';
 
 const PetList: React.FC = () => {
   const [pets, setPets] = useState<Pet[]>([]);
@@ -23,10 +23,23 @@ const PetList: React.FC = () => {
     getPets();
   }, []);
 
+  const handleMoreDetails = (pet: Pet) => {
+    console.log('More details:', pet);
+  };
+
+  const handleContactPoster = (pet: Pet) => {
+    console.log('Contact poster:', pet);
+  };
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {pets.map((pet) => (
-        <PetCard key={pet.id} pet={pet} />
+        <PetCard
+          key={pet.id}
+          pet={pet}
+          onMoreDetails={() => handleMoreDetails(pet)}
+          onContactPoster={() => handleContactPoster(pet)}
+        />
       ))}
     </div>
   );

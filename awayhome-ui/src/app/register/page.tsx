@@ -1,10 +1,6 @@
 // src/app/Register/page.tsx
 import React from 'react';
-import dynamic from 'next/dynamic';
-
-const AuthPage = dynamic(() => import('../auth/AuthPage'), {
-  ssr: false,
-});
+import AuthPage from '../auth/AuthPage';
 
 const RegisterPage: React.FC = () => {
   return <AuthPage initialTab="register" />;

@@ -1,12 +1,17 @@
-
 const withMT = require('@material-tailwind/react/utils/withMT');
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = withMT({
   reactStrictMode: true,
   experimental: {
     appDir: true,
   },
-};
-
-module.exports = withMT(nextConfig);
+  trailingSlash: true,
+  output: 'export',  // Use 'standalone' for server environments
+  babel: {
+    presets: ['next/babel'],
+    plugins: [],
+  },
+  images: {
+    unoptimized: true,
+  },
+});

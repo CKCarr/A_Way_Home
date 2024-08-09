@@ -16,7 +16,7 @@ interface LostPetsProps {
 const LostPets: React.FC<LostPetsProps> = ({ filters }) => {
   const [selectedPet, setSelectedPet] = useState<Pet | null>(null);
   const [filteredPets, setFilteredPets] = useState<Pet[]>(
-    lostPetsData as Pet[],
+    lostPetsData as unknown as Pet[],
   );
 
   const handleCardClick = (pet: Pet) => {
@@ -30,12 +30,16 @@ const LostPets: React.FC<LostPetsProps> = ({ filters }) => {
   useEffect(() => {
     const filterPets = async () => {
       let updatedFilters = { ...filters };
-      let userCoordinates = null;
+      let userCoordinates: { lat: number; lng: number } | null = null;
       if (filters.location) {
         userCoordinates = await getCoordinates(filters.location);
       }
       setFilteredPets(
-        applyFilters(lostPetsData as Pet[], updatedFilters, userCoordinates),
+        applyFilters(
+          lostPetsData as unknown as Pet[],
+          updatedFilters,
+          userCoordinates,
+        ),
       );
     };
 
@@ -51,7 +55,6 @@ const LostPets: React.FC<LostPetsProps> = ({ filters }) => {
               <PetCard
                 key={pet.id}
                 pet={pet}
-                onClick={() => handleCardClick(pet)}
                 onMoreDetails={() => handleCardClick(pet)}
                 onContactPoster={() => alert('Contact Poster')}
               />

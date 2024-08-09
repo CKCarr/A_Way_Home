@@ -7,11 +7,17 @@ import axios from 'axios';
 const loginUser = async (email, password) => {
   try {
     // Sign in with Firebase Authentication
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password,
+    );
     const idToken = await userCredential.user.getIdToken();
 
     // Send ID token to the backend to exchange for a custom token
-    const response = await axios.post('http://localhost:5000/login', { idToken });
+    const response = await axios.post('http://localhost:5000/login', {
+      idToken,
+    });
     const { token } = response.data;
 
     // Store the custom token in localStorage

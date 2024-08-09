@@ -1,20 +1,13 @@
 // pages/resources/shelters.tsx
 import React from 'react';
-import dynamic from 'next/dynamic';
-
-const NearbyResources = dynamic(
-  () => import('../../../components/NearbyResources'),
-  {
-    ssr: false,
-  },
-);
+import NearbyResources from '../../../components/NearbyResources';
 
 const Shelters = () => {
   return (
     <div>
-      <main className="p-4 mx-auto">
+      <div className="p-4 mx-auto">
         <NearbyResources type="animal_shelter" />
-      </main>
+      </div>
     </div>
   );
 };

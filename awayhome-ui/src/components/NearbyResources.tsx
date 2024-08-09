@@ -3,9 +3,22 @@ import 'dotenv/config';
 import React, { useEffect, useState } from 'react';
 import useUserLocation from '../hooks/useUserLocation';
 
+interface Place {
+  place_id: string;
+  name: string;
+  vicinity: string;
+  rating?: number;
+  user_ratings_total?: number;
+  opening_hours?: {
+    open_now: boolean;
+  };
+  formatted_phone_number?: string;
+  website?: string;
+}
+
 const NearbyResources = ({ type }: { type: string }) => {
   const location = useUserLocation();
-  const [places, setPlaces] = useState([]);
+  const [places, setPlaces] = useState<Place[]>([]);
 
   useEffect(() => {
     const loadPlaces = async () => {
@@ -20,10 +33,10 @@ const NearbyResources = ({ type }: { type: string }) => {
           keyword: type === 'animal_shelter' ? 'animal shelter' : undefined,
         };
 
-        const nearbySearchCallback = (results, status) => {
+        const nearbySearchCallback = (results: any, status: any) => {
           if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-            const detailedPlacesPromises = results.map((place) => {
-              return new Promise((resolve) => {
+            const detailedPlacesPromises = results.map((place: any) => {
+              return new Promise<Place | null>((resolve) => {
                 service.getDetails(
                   {
                     placeId: place.place_id,
@@ -37,7 +50,7 @@ const NearbyResources = ({ type }: { type: string }) => {
                       'website',
                     ],
                   },
-                  (detailedPlace, detailsStatus) => {
+                  (detailedPlace: any, detailsStatus: any) => {
                     if (
                       detailsStatus ===
                       window.google.maps.places.PlacesServiceStatus.OK
@@ -52,7 +65,7 @@ const NearbyResources = ({ type }: { type: string }) => {
             });
 
             Promise.all(detailedPlacesPromises).then((detailedPlaces) => {
-              setPlaces(detailedPlaces.filter(Boolean)); // Remove null results
+              setPlaces(detailedPlaces.filter(Boolean) as Place[]); // Remove null results
             });
           } else {
             console.error(
@@ -78,7 +91,7 @@ const NearbyResources = ({ type }: { type: string }) => {
     }
   }, [location, type]);
 
-  const extractDomain = (url) => {
+  const extractDomain = (url: string) => {
     try {
       const { hostname } = new URL(url);
       return hostname;

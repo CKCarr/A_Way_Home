@@ -1,10 +1,7 @@
-// src/app/home/page
+// src/app/page
+// This is the main page component that is used to render the homepage component.
 import React from 'react';
-import dynamic from 'next/dynamic';
-
-const Homepage = dynamic(() => import('../components/Homepage'), {
-  ssr: true,
-});
+import Homepage from '../components/Homepage';
 
 const HomepagePage: React.FC = () => {
   return <Homepage />;
