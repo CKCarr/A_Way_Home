@@ -1,19 +1,15 @@
-import 'dotenv/config';
-import type { Metadata } from 'next';
+// src/layout.tsx
+'use client';
+
+import '../styles/globals.css';
+import React, { ReactNode } from 'react';
 import { Sumana } from 'next/font/google';
-import './globals.css';
-import { ThemeProvider } from './MTailwind';
-import { ReactNode } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { AuthProvider } from '../context/AuthContext';
+import { MTThemeProvider } from './MTailwind';
 
 const sumana = Sumana({ weight: ['400', '700'], subsets: ['latin'] });
-
-export const metadata: Metadata = {
-  title: 'A Way Home',
-  description: 'Connecting Pets and People Online',
-};
 
 interface RootLayoutProps {
   children: ReactNode;
@@ -22,10 +18,14 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
+      <head>
+        <title>A Way Home</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
       <body
         className={`${sumana.className} min-h-screen flex flex-col text-black`}
       >
-        <ThemeProvider>
+        <MTThemeProvider>
           <AuthProvider>
             <Navbar />
             <div className="flex-grow">
@@ -36,7 +36,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </div>
             <Footer />
           </AuthProvider>
-        </ThemeProvider>
+        </MTThemeProvider>
       </body>
     </html>
   );

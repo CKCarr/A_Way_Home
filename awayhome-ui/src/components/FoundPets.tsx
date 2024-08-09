@@ -43,7 +43,7 @@ const FoundPets: React.FC<FoundPetsProps> = ({ filters }) => {
         console.log('Fetched pets data:', petsData); // Log the data
 
         let updatedFilters = { ...filters };
-        let userCoordinates = null;
+        let userCoordinates: { lat: number; lng: number } | null = null;
         if (filters.location) {
           userCoordinates = await getCoordinates(filters.location);
         }

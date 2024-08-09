@@ -3,6 +3,7 @@
 
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
+import { Filters } from '../../types';
 
 const LostPets = dynamic(() => import('../../components/LostPets'), {
   ssr: true,
@@ -12,7 +13,7 @@ const Sidebar = dynamic(() => import('../../components/Sidebar'), {
 });
 
 const LostPetsPage = () => {
-  const [filters, setFilters] = useState({
+  const [filters, setFilters] = useState<Filters>({
     idOrName: '',
     status: 'lost',
     type: '',

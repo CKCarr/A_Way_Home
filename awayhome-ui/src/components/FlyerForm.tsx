@@ -1,10 +1,10 @@
-// src/components/flyerForm.tsx
-
 'use client';
+
 import React, { useState, ChangeEvent, useEffect } from 'react';
-import { db, storage, auth } from '../config/firebaseClient';
-import { collection, addDoc } from 'firebase/firestore';
+import { useFormik } from 'formik';
+import { db, auth, storage } from '../config/firebaseClient';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { collection, addDoc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 import {
   Button,
@@ -45,8 +45,9 @@ const FlyerForm: React.FC<FlyerFormProps> = ({ pet = {}, filters }) => {
     avatar: pet.avatar || '',
   });
 
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [previewPhoto, setPreviewPhoto] = useState<string>('');
+  const [selectedPhoto, setSelectedPhoto] = useState<string>(
+    (formData.photos && formData.photos[0]) || '',
+  );
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -61,6 +62,13 @@ const FlyerForm: React.FC<FlyerFormProps> = ({ pet = {}, filters }) => {
     });
     return () => unsubscribe();
   }, []);
+
+  const formik = useFormik({
+    initialValues: formData,
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
@@ -84,23 +92,31 @@ const FlyerForm: React.FC<FlyerFormProps> = ({ pet = {}, filters }) => {
     }
   };
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+  // Function to upload image
+  const uploadImage = async (file) => {
+    const storageRef = ref(storage, `images/${file.name}`);
+    await uploadBytes(storageRef, file);
+    const fileUrl = await getDownloadURL(storageRef);
+    return fileUrl;
+  };
+
+  // Example usage
+  const handleFileChange = async (event) => {
+    const file = event.target.files[0];
     if (file) {
-      setSelectedFile(file);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        if (reader.result) {
-          setPreviewPhoto(reader.result as string);
-        }
-      };
-      reader.readAsDataURL(file);
+      const imageUrl = await uploadImage(file);
+      console.log('Uploaded image URL:', imageUrl);
+      // store this imageUrl in Firestore or use it as neededa
+      setSelectedPhoto(imageUrl);
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        photos: [imageUrl],
+      }));
     }
   };
 
   const handleDeletePhoto = () => {
-    setPreviewPhoto('');
-    setSelectedFile(null);
+    setSelectedPhoto('');
     setFormData((prevFormData) => ({
       ...prevFormData,
       photos: [],
@@ -123,26 +139,18 @@ const FlyerForm: React.FC<FlyerFormProps> = ({ pet = {}, filters }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const fullAddress = `${formData.address.city}, ${formData.address.state}, ${formData.address.country}`;
+    const fullAddress = `${formData.address?.city || ''}, ${formData.address?.state || ''}, ${formData.address?.country || ''}`;
     const location = await getCoordinates(fullAddress);
 
     if (location) {
+      formData.address = formData.address || {};
       formData.address.latitude = location.lat;
       formData.address.longitude = location.lng;
     }
 
     try {
-      let photoURL = '';
-      if (selectedFile) {
-        const photoRef = ref(storage, `pets/${formData.name}_${Date.now()}`);
-        await uploadBytes(photoRef, selectedFile);
-        photoURL = await getDownloadURL(photoRef);
-        console.log('Photo URL:', photoURL); // Debug log
-      }
-
       const newFormData = {
         ...formData,
-        photos: photoURL ? [photoURL] : [],
       };
 
       await addDoc(collection(db, 'pets'), newFormData);
@@ -155,17 +163,35 @@ const FlyerForm: React.FC<FlyerFormProps> = ({ pet = {}, filters }) => {
 
   return (
     <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto py-16">
-      <Card className="bg-mid-gray text-dark-text border-2 hover:border-bright-teal">
+      <Card
+        className="bg-mid-gray text-dark-text border-2 hover:border-bright-teal"
+        placeholder={undefined}
+        onPointerEnterCapture={undefined}
+        onPointerLeaveCapture={undefined}
+      >
         <CardHeader
-          variant=""
           color="blue-gray"
           className="mb-4 grid h-28 place-items-center bg-light-gray border-4 border-primary-green"
+          placeholder={undefined}
+          onPointerEnterCapture={undefined}
+          onPointerLeaveCapture={undefined}
         >
-          <Typography variant="h3" color="blue-gray">
+          <Typography
+            variant="h3"
+            color="blue-gray"
+            placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+          >
             Create Pet Poster
           </Typography>
         </CardHeader>
-        <CardBody className="flex flex-col gap-4">
+        <CardBody
+          className="flex flex-col gap-4"
+          placeholder={undefined}
+          onPointerEnterCapture={undefined}
+          onPointerLeaveCapture={undefined}
+        >
           <div className="mb-4">
             <label htmlFor="name" className="block text-sm font-bold mb-2">
               Name
@@ -239,10 +265,10 @@ const FlyerForm: React.FC<FlyerFormProps> = ({ pet = {}, filters }) => {
               onChange={handleFileChange}
               className="w-full text-gray-700"
             />
-            {previewPhoto && (
+            {selectedPhoto && (
               <div className="mt-4 relative">
                 <img
-                  src={previewPhoto}
+                  src={selectedPhoto}
                   alt="Selected"
                   className="w-full h-48 object-cover rounded-lg"
                 />
@@ -375,12 +401,20 @@ const FlyerForm: React.FC<FlyerFormProps> = ({ pet = {}, filters }) => {
             </select>
           </div>
         </CardBody>
-        <CardFooter className="pt-0">
+        <CardFooter
+          className="pt-0"
+          placeholder={undefined}
+          onPointerEnterCapture={undefined}
+          onPointerLeaveCapture={undefined}
+        >
           <Button
             variant="text"
             className="text-white bg-primary-green border-2 border-primary-blue hover:border-2 hover:border-primary-blue hover:bg-bright-teal hover:text-primary-blue"
             fullWidth
             type="submit"
+            placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
           >
             Post A Pet
           </Button>

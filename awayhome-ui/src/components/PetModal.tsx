@@ -50,7 +50,7 @@ const PetModal: React.FC<PetModalProps> = ({ pet, onClose }) => {
       <div className="relative bg-white rounded-lg overflow-hidden shadow-lg w-3/4 max-w-2xl border-2 border-indigo-500 p-5 max-h-[90vh] overflow-y-auto no-scrollbar">
         <div className="relative h-64 mb-4 border-x-8 border-t-8 border-indigo-500 rounded-md overflow-hidden">
           <img
-            src={pet.photos?.[0] || '/placeholder-image.png'}
+            src={pet.photos?.[0] || '/default-image.png'}
             alt={pet.name}
             className="w-full h-full object-cover"
           />

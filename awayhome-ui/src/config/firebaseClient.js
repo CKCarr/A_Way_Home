@@ -1,6 +1,10 @@
 // src/config/firebaseClient.js
 import { initializeApp } from 'firebase/app';
-import { getAuth, setPersistence, browserSessionPersistence } from 'firebase/auth';
+import {
+  getAuth,
+  setPersistence,
+  browserSessionPersistence,
+} from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 

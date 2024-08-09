@@ -1,8 +1,9 @@
+/* eslint-disable prettier/prettier */
 'use client';
 
 import React, { useState, useEffect } from 'react';
 import { Textarea, Button } from '../app/MTailwind';
-import { addMessage } from '../api/messages';
+import { addMessage } from '../app/api/messages';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../config/firebaseClient';
 
@@ -32,7 +33,7 @@ const MessageForm: React.FC<MessageFormProps> = ({ receiverId, onClose }) => {
     }
 
     try {
-      const response = await addMessage({ senderId, receiverId, message });
+      await addMessage({ senderId, receiverId, message });
       alert('Message sent successfully');
       setMessage('');
       onClose();
@@ -44,7 +45,7 @@ const MessageForm: React.FC<MessageFormProps> = ({ receiverId, onClose }) => {
 
   return (
     <div className="p-4">
-      <Textarea
+      <textarea
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         placeholder="Type your message here"
@@ -53,12 +54,22 @@ const MessageForm: React.FC<MessageFormProps> = ({ receiverId, onClose }) => {
       <div className="flex justify-between mt-2">
         <Button
           variant="gradient"
-          color="primary-blue"
+          className="bg-primary-blue"
           onClick={handleSendMessage}
+          placeholder={undefined}
+          onPointerEnterCapture={undefined}
+          onPointerLeaveCapture={undefined}
         >
           Send Message
         </Button>
-        <Button variant="text" color="red" onClick={onClose}>
+        <Button
+          variant="text"
+          color="red"
+          onClick={onClose}
+          placeholder={undefined}
+          onPointerEnterCapture={undefined}
+          onPointerLeaveCapture={undefined}
+        >
           Close
         </Button>
       </div>

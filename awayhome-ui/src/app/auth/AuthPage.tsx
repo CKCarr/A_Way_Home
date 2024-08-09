@@ -1,3 +1,4 @@
+// src/app/auth/AuthPage.tsx
 'use client';
 
 import React, { useState } from 'react';

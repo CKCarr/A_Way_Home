@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import {
   Card,
@@ -46,24 +47,62 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({
   };
 
   return (
-    <Card className="p-4 rounded-lg shadow-md text-center border-3 border-primary-blue">
-      <CardHeader className="flex justify-center bg-primary-blue">
+    <Card
+      className="p-4 rounded-lg shadow-md text-center border-3 border-primary-blue"
+      placeholder={undefined}
+      onPointerEnterCapture={undefined}
+      onPointerLeaveCapture={undefined}
+    >
+      <CardHeader
+        className="flex justify-center bg-primary-blue"
+        placeholder={undefined}
+        onPointerEnterCapture={undefined}
+        onPointerLeaveCapture={undefined}
+      >
         <Avatar
           src={avatar}
           alt={name}
           size="xxl"
           className="mb-4 border-2 border-bright-teal"
+          placeholder={undefined}
+          onPointerEnterCapture={undefined}
+          onPointerLeaveCapture={undefined}
         />
       </CardHeader>
-      <CardBody>
-        <Typography variant="h4" className="mb-2">
+      <CardBody
+        placeholder={undefined}
+        onPointerEnterCapture={undefined}
+        onPointerLeaveCapture={undefined}
+      >
+        <Typography
+          variant="h4"
+          className="mb-2"
+          placeholder={undefined}
+          onPointerEnterCapture={undefined}
+          onPointerLeaveCapture={undefined}
+        >
           {name}
         </Typography>
-        <Typography variant="body2">{title}</Typography>
+        <Typography
+          placeholder={undefined}
+          onPointerEnterCapture={undefined}
+          onPointerLeaveCapture={undefined}
+        >
+          {title}
+        </Typography>
       </CardBody>
-      <CardFooter>
+      <CardFooter
+        placeholder={undefined}
+        onPointerEnterCapture={undefined}
+        onPointerLeaveCapture={undefined}
+      >
         {socialLinks.map((link) => (
-          <Typography variant="body2" key={link.type}>
+          <Typography
+            key={link.type}
+            placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+          >
             <a
               href={
                 link.type === 'email'

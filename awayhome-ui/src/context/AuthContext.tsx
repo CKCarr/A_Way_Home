@@ -1,5 +1,6 @@
 // src/context/AuthContext.tsx
 'use client';
+
 import React, {
   createContext,
   useContext,
@@ -27,7 +28,7 @@ const AuthContext = createContext<AuthContextProps>({
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const [userData, setUserData] = useState<{ username: string } | null>(null);
 
   useEffect(() => {

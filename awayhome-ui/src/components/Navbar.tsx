@@ -49,7 +49,12 @@ const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <MTNavbar className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-4 lg:px-8 lg:py-4 bg-primary-blue text-white border-none bg-opacity-100">
+    <MTNavbar
+      className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-4 lg:px-8 lg:py-4 bg-primary-blue text-white border-none bg-opacity-100"
+      placeholder={undefined}
+      onPointerEnterCapture={undefined}
+      onPointerLeaveCapture={undefined}
+    >
       <div className="flex items-center justify-between text-white">
         <Link href="/">
           <div className="mr-4 py-1.5 flex items-center cursor-pointer">
@@ -68,7 +73,7 @@ const Navbar: React.FC = () => {
         </div>
         <div className="flex items-center gap-x-2">
           {loading ? (
-            <span>Loading...</span>
+            <span>Fetching...</span>
           ) : user ? (
             <>
               <span className="hidden lg:inline-block text-size-xl mr-5">
@@ -79,6 +84,9 @@ const Navbar: React.FC = () => {
                 size="sm"
                 className="hidden lg:inline-block text-white border border hover:border-2 hover:border-primary-blue hover:bg-bright-teal hover:text-primary-blue"
                 onClick={handleLogout}
+                placeholder={undefined}
+                onPointerEnterCapture={undefined}
+                onPointerLeaveCapture={undefined}
               >
                 Logout
               </Button>
@@ -90,6 +98,9 @@ const Navbar: React.FC = () => {
                   variant="text"
                   size="sm"
                   className="hidden lg:inline-block text-white border border hover:border-2 hover:border-primary-blue hover:bg-bright-teal hover:text-primary-blue"
+                  placeholder={undefined}
+                  onPointerEnterCapture={undefined}
+                  onPointerLeaveCapture={undefined}
                 >
                   Register
                 </Button>
@@ -99,6 +110,9 @@ const Navbar: React.FC = () => {
                   variant="gradient"
                   size="md"
                   className="hidden lg:inline-block bg-primary-blue hover:border hover:border-bright-teal hover:bg-primary-blue hover:text-bright-teal animate-pulse"
+                  placeholder={undefined}
+                  onPointerEnterCapture={undefined}
+                  onPointerLeaveCapture={undefined}
                 >
                   Sign In
                 </Button>
@@ -110,6 +124,9 @@ const Navbar: React.FC = () => {
             className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
             ripple={false}
             onClick={() => setOpenNav(!openNav)}
+            placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
           >
             {openNav ? <CloseIcon /> : <MenuIcon />}
           </IconButton>
@@ -130,6 +147,9 @@ const Navbar: React.FC = () => {
                 size="sm"
                 className="bg-dark-blue text-white border-white border hover:border-2 hover:border-primary-blue hover:bg-bright-teal hover:text-primary-blue"
                 onClick={handleLogout}
+                placeholder={undefined}
+                onPointerEnterCapture={undefined}
+                onPointerLeaveCapture={undefined}
               >
                 Logout
               </Button>
@@ -142,6 +162,9 @@ const Navbar: React.FC = () => {
                   variant="text"
                   size="sm"
                   className="bg-dark-blue text-white border-white border hover:border-2 hover:border-primary-blue hover:bg-bright-teal hover:text-primary-blue"
+                  placeholder={undefined}
+                  onPointerEnterCapture={undefined}
+                  onPointerLeaveCapture={undefined}
                 >
                   Register
                 </Button>
@@ -152,6 +175,9 @@ const Navbar: React.FC = () => {
                   variant="gradient"
                   size="sm"
                   className="bg-primary-blue hover:border hover:border-bright-teal hover:bg-primary-blue hover:text-bright-teal animate-pulse"
+                  placeholder={undefined}
+                  onPointerEnterCapture={undefined}
+                  onPointerLeaveCapture={undefined}
                 >
                   Sign In
                 </Button>

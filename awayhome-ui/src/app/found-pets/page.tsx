@@ -3,6 +3,7 @@
 
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
+import { Filters } from '../../types';
 
 const FoundPets = dynamic(() => import('../../components/FoundPets'), {
   ssr: true,
@@ -11,8 +12,8 @@ const Sidebar = dynamic(() => import('../../components/Sidebar'), {
   ssr: false,
 });
 
-const FoundPetsPage = () => {
-  const [filters, setFilters] = useState({
+const FoundPetsPage: React.FC = () => {
+  const [filters, setFilters] = useState<Filters>({
     idOrName: '',
     status: 'found',
     type: '',

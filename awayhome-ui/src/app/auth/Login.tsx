@@ -1,4 +1,5 @@
-// src/components/Auth/Login.tsx
+/* eslint-disable no-unused-vars */
+// src/app/auth/Login.tsx
 'use client';
 
 import React, { useState } from 'react';
@@ -13,8 +14,8 @@ import {
   Checkbox,
   Button,
   IconButton,
-} from '../../app/MTailwind';
-import { loginUser } from '../../api/auth';
+} from '../MTailwind';
+import { loginUser } from '../api/auth';
 import EyeOpen from '../../assets/EyeOpen';
 import EyeClosed from '../../assets/EyeClosed';
 
@@ -42,24 +43,45 @@ const Login: React.FC<LoginProps> = ({ setActiveTab }) => {
   };
 
   return (
-    <form onSubmit={handleLogin} className="w-full max-w-md mx-auto">
-      <Card className="bg-mid-gray text-dark-text border-2 hover:border-bright-teal">
+    <form onSubmit={handleLogin} className=" w-full max-w-md mx-auto">
+      <Card
+        className="bg-mid-gray text-dark-text border-2 hover:border-bright-teal"
+        placeholder={undefined}
+        onPointerEnterCapture={undefined}
+        onPointerLeaveCapture={undefined}
+      >
         <CardHeader
-          variant="primary"
           color="blue-gray"
           className="mb-4 grid h-28 place-items-center bg-light-gray border-4 border-primary-green"
+          placeholder={undefined}
+          onPointerEnterCapture={undefined}
+          onPointerLeaveCapture={undefined}
         >
-          <Typography variant="h3" color="blue-gray">
+          <Typography
+            variant="h3"
+            color="blue-gray"
+            placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+          >
             Sign In
           </Typography>
         </CardHeader>
-        <CardBody className="flex flex-col gap-4">
+        <CardBody
+          className="flex flex-col gap-4"
+          placeholder={undefined}
+          onPointerEnterCapture={undefined}
+          onPointerLeaveCapture={undefined}
+        >
           <Input
             label="Email"
             size="lg"
             className="hover:bg-light-gray-2"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+            crossOrigin={undefined}
           />
           <div className="relative">
             <Input
@@ -69,29 +91,54 @@ const Login: React.FC<LoginProps> = ({ setActiveTab }) => {
               type={showPassword ? 'text' : 'password'}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onPointerEnterCapture={undefined}
+              onPointerLeaveCapture={undefined}
+              crossOrigin={undefined}
             />
             <IconButton
               variant="text"
               className="absolute inset-y-0 right-0 mr-2 pr-1 flex items-center text-gray-600"
               onClick={() => setShowPassword(!showPassword)}
+              placeholder={undefined}
+              onPointerEnterCapture={undefined}
+              onPointerLeaveCapture={undefined}
             >
               {showPassword ? <EyeOpen /> : <EyeClosed />}
             </IconButton>
           </div>
           <div className="-ml-2.5">
-            <Checkbox label="Remember Me" />
+            <Checkbox
+              label="Remember Me"
+              onPointerEnterCapture={undefined}
+              onPointerLeaveCapture={undefined}
+              crossOrigin={undefined}
+            />
           </div>
         </CardBody>
-        <CardFooter className="pt-0">
+        <CardFooter
+          className="pt-0"
+          placeholder={undefined}
+          onPointerEnterCapture={undefined}
+          onPointerLeaveCapture={undefined}
+        >
           <Button
             variant="text"
             className="text-white bg-primary-green border-2 border-primary-blue hover:border-2 hover:border-primary-blue hover:bg-bright-teal hover:text-primary-blue"
             fullWidth
             type="submit"
+            placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
           >
             Sign In
           </Button>
-          <Typography variant="small" className="mt-6 flex justify-center">
+          <Typography
+            variant="small"
+            className="mt-6 flex justify-center"
+            placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+          >
             Don&apos;t have an account?
             <Typography
               as="a"
@@ -100,6 +147,9 @@ const Login: React.FC<LoginProps> = ({ setActiveTab }) => {
               color="blue-gray"
               className="ml-1 font-bold"
               onClick={() => setActiveTab('register')}
+              placeholder={undefined}
+              onPointerEnterCapture={undefined}
+              onPointerLeaveCapture={undefined}
             >
               Sign up
             </Typography>

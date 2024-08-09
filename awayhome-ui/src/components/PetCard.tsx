@@ -1,4 +1,5 @@
 // src/components/PetCard.tsx
+
 'use client';
 
 import React, { useState } from 'react';
@@ -9,12 +10,14 @@ import { Pet } from '../types';
 
 interface PetCardProps {
   pet: Pet;
-  onMoreDetails?: (pet: Pet) => void;
-  onContactPoster?: (pet: Pet) => void;
+  onClick: () => void;
+  onMoreDetails: (pet: Pet) => void;
+  onContactPoster: (pet: Pet) => void;
 }
 
 const PetCard: React.FC<PetCardProps> = ({
   pet,
+  onClick,
   onMoreDetails,
   onContactPoster,
 }) => {
@@ -29,14 +32,17 @@ const PetCard: React.FC<PetCardProps> = ({
     setShowPetModal(!showPetModal);
   };
 
-  console.log('Pet photos:', pet.photos); // Add this line to debug the photos
+  console.log('Pet photos:', pet.photos);
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md border-8 border-primary-blue cursor-pointer hover:shadow-lg transition-shadow duration-300 m-4">
+    <div
+      onClick={onClick}
+      className="bg-white p-4 rounded-lg shadow-md border-8 border-primary-blue cursor-pointer hover:shadow-lg transition-shadow duration-300 m-4"
+    >
       <div className="border-t-8 border-l-8 border-r-8 border-bright-teal overflow-hidden h-64">
         {pet.photos && pet.photos.length > 0 ? (
           <img
-            src={pet.photos[0]}
+            src={pet.photos[0] || '/default-image.png'}
             alt={pet.name}
             className="w-full h-full object-cover object-center rounded-t-lg"
             onError={(e) => {
@@ -57,26 +63,41 @@ const PetCard: React.FC<PetCardProps> = ({
       <p>Type: {pet.type}</p>
       <p>Breed: {pet.breed}</p>
       <p>
-        Location: {pet.address.city}, {pet.address.country}
+        Location:{' '}
+        {pet.address
+          ? `${pet.address.city}, ${pet.address.country}`
+          : 'Unknown'}
       </p>
       <p>Size: {pet.size}</p>
-      <p>Date Posted: {new Date(pet.datePost).toLocaleDateString()}</p>
+      <p>Date Posted: {new Date(pet.datePost || '').toLocaleDateString()}</p>
       <div className="flex flex-col space-y-4 mt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
         <Button
           fullWidth
-          onClick={handleTogglePetModal}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleTogglePetModal();
+          }}
           variant="gradient"
           size="sm"
           className="bg-primary-blue hover:border hover:border-bright-teal hover:bg-primary-blue hover:text-bright-teal"
+          placeholder={undefined}
+          onPointerEnterCapture={undefined}
+          onPointerLeaveCapture={undefined}
         >
           More Details
         </Button>
         <Button
           fullWidth
-          onClick={handleToggleMessageForm}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleToggleMessageForm();
+          }}
           variant="text"
           size="sm"
           className="bg-dark-blue text-white border-white border hover:border-2 hover:border-primary-blue hover:bg-bright-teal hover:text-primary-blue"
+          placeholder={undefined}
+          onPointerEnterCapture={undefined}
+          onPointerLeaveCapture={undefined}
         >
           Contact Poster
         </Button>
@@ -86,7 +107,7 @@ const PetCard: React.FC<PetCardProps> = ({
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="relative bg-white rounded-lg overflow-hidden shadow-lg w-3/4 max-w-2xl border-2 border-indigo-500 p-5">
             <MessageForm
-              receiverId={pet.userLogin} // Ensure this is securely handled in the MessageForm component
+              receiverId={pet.userLogin || ''}
               onClose={handleToggleMessageForm}
             />
           </div>

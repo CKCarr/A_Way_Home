@@ -12,9 +12,9 @@ const NearbyResources = dynamic(
 const Shelters = () => {
   return (
     <div>
-      <main className="p-4 mx-auto">
+      <div className="p-4 mx-auto">
         <NearbyResources type="animal_shelter" />
-      </main>
+      </div>
     </div>
   );
 };

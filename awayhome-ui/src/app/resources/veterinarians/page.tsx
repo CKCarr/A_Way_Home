@@ -12,9 +12,9 @@ const NearbyResources = dynamic(
 const Veterinarians = () => {
   return (
     <div>
-      <main className="p-4 mx-auto">
+      <div className="p-4 mx-auto">
         <NearbyResources type="veterinary_care" />
-      </main>
+      </div>
     </div>
   );
 };

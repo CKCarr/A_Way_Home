@@ -1,7 +1,9 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 
-const AboutUs = dynamic(() => import('../../components/About'), { ssr: false });
+const AboutUs = dynamic(() => import('../../components/About'), {
+  ssr: false,
+});
 const TeamLinks = dynamic(() => import('../../components/TeamLinks'), {
   ssr: false,
 });

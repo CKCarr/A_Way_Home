@@ -1,4 +1,4 @@
-// src/components/Auth/Logout.tsx
+// src/app/auth/Logout.tsx
 'use client';
 
 import React from 'react';
