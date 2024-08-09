@@ -1,15 +1,11 @@
-// src/app/api/auth.ts
+// src/api/auth.ts
 import 'dotenv/config';
 import api from '../../config/axiosConfig';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../config/firebaseClient';
 
 // register user
-export const registerUser = async (
-  username: string,
-  email: string,
-  password: string,
-) => {
+export const registerUser = async (username, email, password) => {
   const response = await api.post(`/api/auth/register`, {
     username,
     email,
@@ -39,7 +35,7 @@ export const loginUser = async (email: string, password: string) => {
 };
 
 // Fetch User Details
-export const getUserDetails = async (idToken: string) => {
+export const getUserDetails = async (idToken) => {
   const response = await api.get(`/api/auth/me`, {
     headers: {
       Authorization: `Bearer ${idToken}`,

@@ -23,10 +23,6 @@ const PetList: React.FC = () => {
     getPets();
   }, []);
 
-  const handleCardClick = (pet: Pet) => {
-    console.log('Card clicked:', pet);
-  };
-
   const handleMoreDetails = (pet: Pet) => {
     console.log('More details:', pet);
   };
@@ -41,7 +37,6 @@ const PetList: React.FC = () => {
         <PetCard
           key={pet.id}
           pet={pet}
-          onClick={() => handleCardClick(pet)}
           onMoreDetails={() => handleMoreDetails(pet)}
           onContactPoster={() => handleContactPoster(pet)}
         />

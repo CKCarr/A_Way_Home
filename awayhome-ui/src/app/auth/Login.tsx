@@ -38,7 +38,6 @@ const Login: React.FC<LoginProps> = ({ setActiveTab }) => {
       router.push('/');
     } catch (error) {
       console.error('Error logging in:', error);
-      alert(error.response?.data?.error || 'Login failed');
     }
   };
 

@@ -1,12 +1,8 @@
 // src/app/auth/AuthPage.tsx
 'use client';
-
+import Login from './Login';
+import Register from './Register';
 import React, { useState } from 'react';
-import dynamic from 'next/dynamic';
-
-// Dynamically import the Login and Register components
-const Login = dynamic(() => import('./Login'), { ssr: false });
-const Register = dynamic(() => import('./Register'), { ssr: false });
 
 const AuthPage: React.FC<{ initialTab?: 'login' | 'register' }> = ({
   initialTab = 'login',

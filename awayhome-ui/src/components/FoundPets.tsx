@@ -1,5 +1,3 @@
-// src/components/FoundPets.tsx
-
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -10,6 +8,7 @@ import { getCoordinates } from '../utils/location';
 import { Pet, Filters } from '../types';
 import { db } from '../config/firebaseClient';
 import { collection, getDocs, query, where } from 'firebase/firestore';
+import foundPetsData from '../pets-json/foundPetsData.json';
 
 interface FoundPetsProps {
   filters: Filters;
@@ -30,26 +29,29 @@ const FoundPets: React.FC<FoundPetsProps> = ({ filters }) => {
   useEffect(() => {
     const fetchPets = async () => {
       try {
-        const q = query(
-          collection(db, 'pets'),
-          where('status', '==', 'found'), // Adjust the field and value according to your Firestore structure
-        );
+        const q = query(collection(db, 'pets'), where('status', '==', 'found'));
         const querySnapshot = await getDocs(q);
         const petsData = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         })) as Pet[];
 
-        console.log('Fetched pets data:', petsData); // Log the data
+        const combinedPetsData = [
+          ...petsData,
+          ...(foundPetsData as unknown as Pet[]),
+        ];
 
-        let updatedFilters = { ...filters };
         let userCoordinates: { lat: number; lng: number } | null = null;
         if (filters.location) {
           userCoordinates = await getCoordinates(filters.location);
         }
-        setFilteredPets(
-          applyFilters(petsData, updatedFilters, userCoordinates),
+
+        const filtered = applyFilters(
+          combinedPetsData,
+          filters,
+          userCoordinates,
         );
+        setFilteredPets(filtered);
       } catch (error) {
         console.error('Error fetching pets: ', error);
       }
@@ -67,7 +69,6 @@ const FoundPets: React.FC<FoundPetsProps> = ({ filters }) => {
               <PetCard
                 key={pet.id}
                 pet={pet}
-                onClick={() => handleCardClick(pet)}
                 onMoreDetails={() => handleCardClick(pet)}
                 onContactPoster={() => alert('Contact Poster')}
               />

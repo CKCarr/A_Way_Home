@@ -1,4 +1,4 @@
-// src/app/auth/Register.tsx
+// src/components/Auth/Register.tsx
 'use client';
 
 import React, { useState } from 'react';

@@ -1,9 +1,24 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { getCoordinates } from '../utils/location';
 
 const Sidebar = ({ filters, setFilters }) => {
   const [distance, setDistance] = useState(filters.distance);
+
+  useEffect(() => {
+    const fetchCoordinates = async () => {
+      if (filters.location) {
+        const coordinates = await getCoordinates(filters.location);
+        setFilters((prevFilters) => ({
+          ...prevFilters,
+          userCoordinates: coordinates,
+        }));
+      }
+    };
+
+    fetchCoordinates();
+  }, [filters.location, setFilters]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

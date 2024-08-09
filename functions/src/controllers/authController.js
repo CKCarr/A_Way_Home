@@ -45,13 +45,18 @@ export const loginUser = async (req, res) => {
   }
 
   try {
-    const decodedToken = await auth.verifyIdToken(idToken);
-    const uid = decodedToken.uid;
+    // Fetch user data from Firebase Authentication
+    const userRecord = await auth.getUser(uid);
 
-    const customToken = await auth.createCustomToken(uid);
-
-    res.json({ token: customToken });
+    res.json({
+      message: 'Login successful',
+      uid: userRecord.uid,
+      email: userRecord.email,
+      displayName: userRecord.displayName,
+      photoURL: userRecord.photoURL,
+    });
   } catch (error) {
+    console.error('Error in loginUser:', error);
     res.status(401).json({ error: error.message });
   }
 };

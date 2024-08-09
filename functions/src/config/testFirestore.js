@@ -1,3 +1,4 @@
+ 
 // testFirestore.js is a standalone script that tests the connection to Firestore. It uses the Firebase Admin SDK to connect to Firestore and create a test document with a test field and value. This script is useful for testing the Firestore connection and ensuring that the environment variables are correctly set up.
 // testFirestore.js is a standalone script that tests the connection to Firestore. It uses the Firebase Admin SDK to connect to Firestore and create a test document with a test field and value. This script is useful for testing the Firestore connection and ensuring that the environment variables are correctly set up.
 import dotenv from 'dotenv';

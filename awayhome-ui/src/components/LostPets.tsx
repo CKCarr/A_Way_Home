@@ -55,7 +55,6 @@ const LostPets: React.FC<LostPetsProps> = ({ filters }) => {
               <PetCard
                 key={pet.id}
                 pet={pet}
-                onClick={() => handleCardClick(pet)}
                 onMoreDetails={() => handleCardClick(pet)}
                 onContactPoster={() => alert('Contact Poster')}
               />

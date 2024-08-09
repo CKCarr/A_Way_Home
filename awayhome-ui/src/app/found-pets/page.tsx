@@ -2,15 +2,9 @@
 'use client';
 
 import React, { useState } from 'react';
-import dynamic from 'next/dynamic';
 import { Filters } from '../../types';
-
-const FoundPets = dynamic(() => import('../../components/FoundPets'), {
-  ssr: true,
-});
-const Sidebar = dynamic(() => import('../../components/Sidebar'), {
-  ssr: false,
-});
+import FoundPets from '../../components/FoundPets';
+import Sidebar from '../../components/Sidebar';
 
 const FoundPetsPage: React.FC = () => {
   const [filters, setFilters] = useState<Filters>({
@@ -26,8 +20,12 @@ const FoundPetsPage: React.FC = () => {
 
   return (
     <div className="flex min-h-screen">
-      <Sidebar filters={filters} setFilters={setFilters} />
-      <div className="flex-grow p-4">
+      <div className="w-full md:w-1/5 lg:w-1/5 sm:w-1/3 md:mr-4 sm:mr-4">
+        <div className="sticky top-0">
+          <Sidebar filters={filters} setFilters={setFilters} />
+        </div>
+      </div>
+      <div className="flex-grow p-4 overflow-y-auto">
         <h1 className="text-4xl font-bold text-center mt-4">Found Pets</h1>
         <FoundPets filters={filters} />
       </div>

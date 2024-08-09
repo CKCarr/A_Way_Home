@@ -20,7 +20,7 @@
     "@fontsource/roboto": "^5.0.13",
     "@fontsource/sumana": "^5.0.13",
     "@material-tailwind/react": "^2.1.9",
-    "autoprefixer": "^10.4.19",
+    "autoprefixer": "^10.4.20",
     "axios": "^1.7.2",
     "dotenv": "^16.4.5",
     "firebase": "^10.12.4",
@@ -29,7 +29,8 @@
     "react": "^18.3.1",
     "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.3.1",
-    "react-firebase-hooks": "^5.1.1"
+    "react-firebase-hooks": "^5.1.1",
+    "winston": "^3.14.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.25.3",
@@ -44,9 +45,9 @@
     "eslint-config-next": "^14.2.5",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
-    "postcss": "^8.4.39",
+    "postcss": "^8.4.41",
     "prettier": "^3.3.3",
-    "tailwindcss": "^3.4.4",
-    "typescript": "^4.9.5"
+    "tailwindcss": "^3.4.9",
+    "typescript": "4.9.5"
   }
 }

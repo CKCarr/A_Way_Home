@@ -5,5 +5,13 @@ module.exports = withMT({
   experimental: {
     appDir: true,
   },
-  output: 'standalone', // Important for Firebase Hosting
+  trailingSlash: true,
+  output: 'export',  // Use 'standalone' for server environments
+  babel: {
+    presets: ['next/babel'],
+    plugins: [],
+  },
+  images: {
+    unoptimized: true,
+  },
 });

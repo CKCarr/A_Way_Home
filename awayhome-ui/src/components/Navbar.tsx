@@ -76,7 +76,7 @@ const Navbar: React.FC = () => {
             <span>Fetching...</span>
           ) : user ? (
             <>
-              <span className="hidden lg:inline-block text-size-xl mr-5">
+              <span className="hidden lg:inline-block text-size-xxl mr-5">
                 Hello, {user.displayName || user.email || 'User'}
               </span>
               <Button

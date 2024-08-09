@@ -1,5 +1,4 @@
 // src/app/auth/Logout.tsx
-'use client';
 
 import React from 'react';
 import { auth } from '../../config/firebaseClient';

@@ -1,5 +1,3 @@
-// src/components/PetCard.tsx
-
 'use client';
 
 import React, { useState } from 'react';
@@ -10,35 +8,23 @@ import { Pet } from '../types';
 
 interface PetCardProps {
   pet: Pet;
-  onClick: () => void;
   onMoreDetails: (pet: Pet) => void;
   onContactPoster: (pet: Pet) => void;
 }
 
 const PetCard: React.FC<PetCardProps> = ({
   pet,
-  onClick,
   onMoreDetails,
   onContactPoster,
 }) => {
   const [showMessageForm, setShowMessageForm] = useState(false);
-  const [showPetModal, setShowPetModal] = useState(false);
 
   const handleToggleMessageForm = () => {
     setShowMessageForm(!showMessageForm);
   };
 
-  const handleTogglePetModal = () => {
-    setShowPetModal(!showPetModal);
-  };
-
-  console.log('Pet photos:', pet.photos);
-
   return (
-    <div
-      onClick={onClick}
-      className="bg-white p-4 rounded-lg shadow-md border-8 border-primary-blue cursor-pointer hover:shadow-lg transition-shadow duration-300 m-4"
-    >
+    <div className="bg-white p-4 rounded-lg shadow-md border-8 border-primary-blue hover:shadow-lg transition-shadow duration-300 m-4">
       <div className="border-t-8 border-l-8 border-r-8 border-bright-teal overflow-hidden h-64">
         {pet.photos && pet.photos.length > 0 ? (
           <img
@@ -73,10 +59,7 @@ const PetCard: React.FC<PetCardProps> = ({
       <div className="flex flex-col space-y-4 mt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
         <Button
           fullWidth
-          onClick={(e) => {
-            e.stopPropagation();
-            handleTogglePetModal();
-          }}
+          onClick={() => onMoreDetails(pet)}
           variant="gradient"
           size="sm"
           className="bg-primary-blue hover:border hover:border-bright-teal hover:bg-primary-blue hover:text-bright-teal"
@@ -88,10 +71,7 @@ const PetCard: React.FC<PetCardProps> = ({
         </Button>
         <Button
           fullWidth
-          onClick={(e) => {
-            e.stopPropagation();
-            handleToggleMessageForm();
-          }}
+          onClick={handleToggleMessageForm}
           variant="text"
           size="sm"
           className="bg-dark-blue text-white border-white border hover:border-2 hover:border-primary-blue hover:bg-bright-teal hover:text-primary-blue"
@@ -102,7 +82,6 @@ const PetCard: React.FC<PetCardProps> = ({
           Contact Poster
         </Button>
       </div>
-      {showPetModal && <PetModal pet={pet} onClose={handleTogglePetModal} />}
       {showMessageForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="relative bg-white rounded-lg overflow-hidden shadow-lg w-3/4 max-w-2xl border-2 border-indigo-500 p-5">

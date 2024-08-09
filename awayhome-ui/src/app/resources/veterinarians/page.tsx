@@ -1,13 +1,6 @@
 // pages/resources/veterinarians.tsx
 import React from 'react';
-import dynamic from 'next/dynamic';
-
-const NearbyResources = dynamic(
-  () => import('../../../components/NearbyResources'),
-  {
-    ssr: false,
-  },
-);
+import NearbyResources from '../../../components/NearbyResources';
 
 const Veterinarians = () => {
   return (

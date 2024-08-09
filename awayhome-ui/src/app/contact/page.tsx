@@ -1,18 +1,14 @@
 import React from 'react';
-import dynamic from 'next/dynamic';
-
-const AboutUs = dynamic(() => import('../../components/About'), {
-  ssr: false,
-});
-const TeamLinks = dynamic(() => import('../../components/TeamLinks'), {
-  ssr: false,
-});
+import AboutUs from '../../components/About';
+import TeamLinks from '../../components/TeamLinks';
 
 const ContactPage = () => {
   return (
-    <div>
-      <div className="flex flex-wrap justify-center space-x-2 ">
+    <div className="flex flex-col md:flex-row justify-center md:space-x-2 space-y-4 md:space-y-0">
+      <div className="flex-1">
         <TeamLinks />
+      </div>
+      <div className="flex-1">
         <AboutUs />
       </div>
     </div>

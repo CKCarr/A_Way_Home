@@ -1,7 +1,7 @@
 /* src/app/globals.css */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 @import url('https://fonts.googleapis.com/css2?family=Sumana:wght@400;700&display=swap');
 
 /* Custom root variables for theming */
@@ -39,7 +39,7 @@ body {
   min-height: 100%;
 }
 
-body>#root>.app {
+body > #root > .app {
   display: flex;
   flex-direction: column;
   flex: 1;

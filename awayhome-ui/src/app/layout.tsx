@@ -1,15 +1,11 @@
 // src/layout.tsx
-'use client';
 
-import '../styles/globals.css';
+import './globals.css';
 import React, { ReactNode } from 'react';
-import { Sumana } from 'next/font/google';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { AuthProvider } from '../context/AuthContext';
 import { MTThemeProvider } from './MTailwind';
-
-const sumana = Sumana({ weight: ['400', '700'], subsets: ['latin'] });
 
 interface RootLayoutProps {
   children: ReactNode;
@@ -22,9 +18,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <title>A Way Home</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body
-        className={`${sumana.className} min-h-screen flex flex-col text-black`}
-      >
+      <body className={`min-h-screen flex flex-col text-black`}>
         <MTThemeProvider>
           <AuthProvider>
             <Navbar />

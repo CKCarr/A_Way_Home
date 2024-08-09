@@ -2,13 +2,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import dynamic from 'next/dynamic';
+import FlyerForm from '../../components/FlyerForm';
 import { Filters } from '../../types';
-
-// Dynamically import the FlyerForm component
-const FlyerForm = dynamic(() => import('../../components/FlyerForm'), {
-  ssr: false,
-});
 
 const FlyerFormPage: React.FC = () => {
   const [filters, setFilters] = useState<Filters>({
